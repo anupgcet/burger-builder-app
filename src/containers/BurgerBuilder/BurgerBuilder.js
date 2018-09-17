@@ -44,7 +44,7 @@ class BurgerBuilder extends Component{
 
    purchaseContinue = () => {
       // alert("please select payment method");
-      this.setState({ loading: true});
+  /*     this.setState({ loading: true});
       const order = {
           ingredients : this.state.ingredients,
           price: this.state.totalPrice,
@@ -62,6 +62,16 @@ class BurgerBuilder extends Component{
       })
       .catch(error =>{
         this.setState({ loading: false, purchasing: false});
+      }); */
+      const params = [];
+      for(let param in this.state.ingredients){
+          params.push(encodeURIComponent(param)+'='+encodeURIComponent(this.state.ingredients[param]))
+      }
+
+      const searchParam = params.join('&');
+      this.props.history.push({
+          pathname : '/checkout',
+          search : '?'+searchParam
       });
       
    }
